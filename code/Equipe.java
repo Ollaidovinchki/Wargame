@@ -8,6 +8,16 @@ public class Equipe {
 	protected int id;
 	protected ArrayList<Unite> liste_unite_equipe = new ArrayList<Unite>();
 	
+	public Equipe(int i) {
+		this.id=i;
+	}
+	
+	public int getId() { return this.id; }
+	
+	public ArrayList<Unite> getListeEquipe() { return this.liste_unite_equipe; }
+	
+	public int getTailleEquipe() { return this.liste_unite_equipe.size(); }
+	
 	public void CreationEquipe(ArrayList<Unite> liste) {
 		
 		int taille_equipe = 0;
@@ -20,7 +30,32 @@ public class Equipe {
 		do {
 			//Selection d'une unite
 			choix = SelectionUnite();
-			liste_unite_equipe.add(liste.get(choix));
+			if(choix==0) {
+				Infanterie inf = new Infanterie();
+				inf.setEquipe(this.id);
+				this.liste_unite_equipe.add(inf);
+			}
+			else if(choix == 1) {
+				InfLourde infl = new InfLourde();
+				infl.setEquipe(this.id);
+				this.liste_unite_equipe.add(infl);
+			}
+			else if(choix == 2) {
+				Cavalerie cav = new Cavalerie();
+				cav.setEquipe(this.id);
+				this.liste_unite_equipe.add(cav);
+			}
+			else if(choix == 3) {
+				Mage mage = new Mage();
+				mage.setEquipe(this.id);
+				this.liste_unite_equipe.add(mage);
+			}
+			else if(choix == 4) {
+				Archer arc = new Archer();
+				arc.setEquipe(this.id);
+				this.liste_unite_equipe.add(arc);
+			}
+				
 			taille_equipe += 1;
 			
 		}while(taille_equipe < taille_max);
