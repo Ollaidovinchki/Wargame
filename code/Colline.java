@@ -1,4 +1,3 @@
-package projet_v1;
 
 public class Colline extends Case_hexagonales {
 	

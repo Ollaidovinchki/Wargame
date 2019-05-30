@@ -1,4 +1,3 @@
-package projet_v1;
 
 public class Plaine extends Case_hexagonales {
 

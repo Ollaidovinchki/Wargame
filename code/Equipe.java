@@ -1,4 +1,3 @@
-package projet_v1;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,7 +23,7 @@ public class Equipe {
 		int taille_max = 3;
 		int choix;
 		
-		//Affichage de toutes les unités
+		//Affichage de toutes les unites
 		this.AfficheListeChoix(liste);
 		
 		do {
@@ -59,7 +58,7 @@ public class Equipe {
 			taille_equipe += 1;
 			
 		}while(taille_equipe < taille_max);
-		System.out.println("Votre équipe est maintenant complète!");
+		System.out.println("Votre equipe est maintenant complete!");
 		this.AfficheListeChoix(this.liste_unite_equipe);
 	}
 	

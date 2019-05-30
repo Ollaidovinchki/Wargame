@@ -1,4 +1,3 @@
-package projet_v1;
 
 import java.util.Random;
 
@@ -65,7 +64,7 @@ public class Unite {
 	public void setDepl(int p) {
 		this.depl -= p;
 	}
-	// On ré initialise les déplacements de cette unité une fois son tour finis
+	// On re initialise les deplacements de cette unite une fois son tour finis
 	public void ReinitialiseDepl(int p) {this.depl = p;}
 	
 	public void setEquipe(int i) {
@@ -94,7 +93,7 @@ public class Unite {
 		if(D_subit <= 0)
 			D_subit = 1;
 		
-		// Aléatoire
+		// Aleatoire
 		critique = rnd.nextInt(10);
 		if(critique >= 7)
 			critique = D_subit;
@@ -102,7 +101,7 @@ public class Unite {
 			critique = 0;
 		D_subit = D_subit + critique;
 		ennemie.setPV(-D_subit);
-		System.out.println("Attaque réalisé sur "+ennemie.getType()+ " nombre de dégat infligés = "+-D_subit);
+		System.out.println("Attaque realise sur "+ennemie.getType()+ " nombre de degat infliges = "+-D_subit);
 	}
 	
 	public void Recuperation(){
@@ -113,7 +112,7 @@ public class Unite {
 			if(this.pv > this.max_pv)
 				this.max_pv = max_pv;
 		}
-		System.out.println("Points de vie récupérés = "+x);
+		System.out.println("Points de vie recuperes = "+x);
 	}
 
 }
