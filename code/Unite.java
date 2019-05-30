@@ -5,6 +5,7 @@ import java.util.Random;
 public class Unite {
 	
 	protected int pv;
+	protected int max_pv;
 	protected int p_att;
 	protected int p_def;
 	protected int depl;
@@ -18,6 +19,7 @@ public class Unite {
 	Unite(String type, int pv, int p_att, int p_def, int depl, int vision, boolean etat){
 		this.type = type;
 		this.pv = pv;
+		this.max_pv = pv;
 		this.p_att = p_att;
 		this.p_def = p_def;
 		this.depl = depl;
@@ -104,7 +106,14 @@ public class Unite {
 	}
 	
 	public void Recuperation(){
-		this.pv = this.pv + (int)(0.05 * this.pv + 1);
+		int x=0;
+		if(this.pv < this.max_pv) {
+			this.pv = this.pv + (int)(0.05 * this.pv + 1);
+			x=(int)(0.05 * this.pv + 1);
+			if(this.pv > this.max_pv)
+				this.max_pv = max_pv;
+		}
+		System.out.println("Points de vie récupérés = "+x);
 	}
 
 }

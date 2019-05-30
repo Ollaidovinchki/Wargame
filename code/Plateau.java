@@ -239,6 +239,7 @@ public class Plateau {
 		Mage mage = new Mage();
 		ListeUnite l_u = new ListeUnite();
 		int save_depl = 0;
+		int nbr_depl = 0;
 		
 		Plateau plateau = new Plateau(liste_t);
 		plateau.AfficheTerrain();
@@ -262,6 +263,7 @@ public class Plateau {
 				save_depl = plateau.equipe1.liste_unite_equipe.get(i).getDepl();
 				
 				while(plateau.equipe1.liste_unite_equipe.get(i).getDepl()>0) {
+					nbr_depl ++;
 					plateau.equipe1.liste_unite_equipe.get(i).InfoUnit();
 					plateau.CaseDeplacementUnit(plateau.equipe1.liste_unite_equipe.get(i));
 					if(plateau.coup_colonne.size()==0 && plateau.coup_ligne.size()==0) {
@@ -285,10 +287,15 @@ public class Plateau {
 						else {
 							System.out.println("Vous avez choisi de passer votre tour.");
 							plateau.equipe1.liste_unite_equipe.get(i).setDepl(20);
+							if(nbr_depl==1) {
+								System.out.println("Vous avez choisi de passer votre tour dès le début vous allez donc récupérer des points de vie sur cette unité.");
+								plateau.equipe1.liste_unite_equipe.get(i).Recuperation();
+							}
 						}
 					}
 					plateau.AffUnite();
 				}
+				nbr_depl = 0;
 				plateau.equipe1.liste_unite_equipe.get(i).ReinitialiseDepl(save_depl);
 			}
 			
@@ -296,6 +303,7 @@ public class Plateau {
 				save_depl = plateau.equipe2.liste_unite_equipe.get(i).getDepl();
 				
 				while(plateau.equipe2.liste_unite_equipe.get(i).getDepl()>0) {
+					nbr_depl++;
 					plateau.CaseDeplacementUnit(plateau.equipe2.liste_unite_equipe.get(i));
 					if(plateau.coup_colonne.size()==0 && plateau.coup_ligne.size()==0) {
 						System.out.println("Aucun coup possibles on stop avec cette unité!");
@@ -318,10 +326,15 @@ public class Plateau {
 						else {
 							System.out.println("Vous avez choisi de passer votre tour.");
 							plateau.equipe2.liste_unite_equipe.get(i).setDepl(20);
+							if(nbr_depl==1) {
+								System.out.println("Vous avez choisi de passer votre tour dès le début vous allez donc récupérer des points de vie sur cette unité.");
+								plateau.equipe2.liste_unite_equipe.get(i).Recuperation();
+							}
 						}
 					}
 					plateau.AffUnite();
 				}
+				nbr_depl = 0;
 				plateau.equipe2.liste_unite_equipe.get(i).ReinitialiseDepl(save_depl);
 			}
 		}
