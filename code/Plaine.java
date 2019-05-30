@@ -11,9 +11,11 @@ public class Plaine extends Case_hexagonales {
 	/**
 	* constructeur 
 	*/
-	public Plaine() {
-		super();
+	public Plaine(int cordX, int cordY) {
+		super(cordX, cordY);
 		this.setPoint_deplacement(POINT_DEPLACEMENT);
 		this.setBonus_defense(BONUS_DEFENSE);
+		// todo charger l'image pour ce type de case, ie remplacer null
+		this.setImage(null);
 	}
 }
