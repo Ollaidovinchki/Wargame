@@ -1,8 +1,10 @@
+package projet_v1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Equipe {
+public class Equipe implements Serializable{
 
 	protected int id;
 	protected ArrayList<Unite> liste_unite_equipe = new ArrayList<Unite>();
@@ -23,7 +25,7 @@ public class Equipe {
 		int taille_max = 3;
 		int choix;
 		
-		//Affichage de toutes les unites
+		//Affichage de toutes les unités
 		this.AfficheListeChoix(liste);
 		
 		do {
@@ -58,7 +60,7 @@ public class Equipe {
 			taille_equipe += 1;
 			
 		}while(taille_equipe < taille_max);
-		System.out.println("Votre equipe est maintenant complete!");
+		System.out.println("Votre équipe est maintenant complète!");
 		this.AfficheListeChoix(this.liste_unite_equipe);
 	}
 	

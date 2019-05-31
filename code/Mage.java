@@ -1,3 +1,4 @@
+package projet_v1;
 
 public class Mage extends Unite {
 

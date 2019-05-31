@@ -1,5 +1,8 @@
+package projet_v1;
 
-public class Case_hexagonales {
+import java.io.Serializable;
+
+public class Case_hexagonales implements Serializable{
 	
 	/**
 	* Classe Case_hexagonales

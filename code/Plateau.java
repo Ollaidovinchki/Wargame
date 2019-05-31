@@ -1,10 +1,18 @@
 package projet_v1;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Plateau {
+public class Plateau implements Serializable{
 
 	protected Case_hexagonales t_jeu[][] = new Case_hexagonales[10][10];
 	protected Equipe equipe1;
@@ -175,7 +183,7 @@ public class Plateau {
 					this.coup_colonne.add(colonne);
 					this.coup_ligne.add(ligne-1);
 				}
-				if(colonne != 9) {
+				if(colonne != 0) {
 					if(VerifDeplacement(unit,ligne-1,colonne-1)) {
 						this.coup_colonne.add(colonne-1);
 						this.coup_ligne.add(ligne-1);
@@ -199,7 +207,7 @@ public class Plateau {
 					this.coup_colonne.add(colonne);
 					this.coup_ligne.add(ligne+1);
 				}
-				if(colonne != 9) {
+				if(colonne != 0) {
 					if(VerifDeplacement(unit,ligne+1,colonne-1)) {
 						this.coup_colonne.add(colonne-1);
 						this.coup_ligne.add(ligne+1);
@@ -367,8 +375,23 @@ public class Plateau {
 			
 		}
 	
+	////////////////////////////
+	//SAUVEGARDE DE LA PARTIE
+	/* 
+	File fichier = new File("save1.ser");
+	ObjectOutputStream oos =  new ObjectOutputStream(new FileOutputStream(fichier)) ;
+	oos.writeObject(plateau);
+	*/
+	////////////////////////////
+	////////////////////////////
+	// CHARGEMENT D'UN FICHIER SAUVEGARDE
+	/* 
+	File fichier = new File("save1.ser");
+	ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;
+	plateau =(Plateau)ois.readObject();
+	*/
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 		ListeTerrain liste_t = new ListeTerrain();
 		Archer arch = new Archer();
 		Infanterie inf = new Infanterie();
@@ -419,7 +442,7 @@ public class Plateau {
 						do {
 							System.out.println("choix : ");
 							choix = sc.nextInt();
-						}while(choix < 0 || choix>=plateau.coup_colonne.size()+1);
+						}while(choix < 0|| choix>=plateau.coup_colonne.size()+1);
 						if(choix !=0)
 							plateau.AffecterDeplacement(plateau.equipe1.liste_unite_equipe.get(i), choix-1);
 						else {
