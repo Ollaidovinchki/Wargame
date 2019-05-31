@@ -1,3 +1,4 @@
+package projet_v1;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,7 +15,7 @@ public class Plateau {
 	Plateau(ListeTerrain liste_t) {
 		Random rnd = new Random();
 		int alea = 0;
-		// Attention, toutes les case de meme type (exemple tous les montagnes vont etre modifie
+		// Attention, toutes les case de même type (exemple tous les montagnes vont etre modifié
 		for(int i=0;i<10;i++) {
 			for(int j=0;j<10;j++) {
 				alea = rnd.nextInt(7);
@@ -45,7 +46,7 @@ public class Plateau {
 	}
 	
 	public void AfficheTerrain() {
-	// Pour afficher les terrains, remplacer avec des coordonnees et des images	
+	// Pour afficher les terrains, remplacer avec des coordonnées et des images	
 		for(int i=0;i<10;i++) {
 			for(int j=0;j<10;j++) {
 				if(this.t_jeu[i][j] instanceof Colline)
@@ -107,13 +108,30 @@ public class Plateau {
 			return false;
 	}
 	
-	// On verifie les coups possibles d'une unite
+	public boolean VerifAttaqueDistance(Unite unit,int ligne,int colonne) {
+		int pd = this.t_jeu[ligne][colonne].getPoint_deplacement();
+		int u_equipe = unit.getEquipe();
+		if(unit.getDepl() >= pd ){
+			if(this.t_jeu[ligne][colonne].getEtatCase()==0)
+				return false; // Deplacement possible sur cette case
+			else if(this.t_jeu[ligne][colonne].getEtatCase() != u_equipe) { 
+				System.out.println("Attaque à distance possible!");
+				return true; // Attaquer la cible
+			}
+			else 
+				return false;
+		}
+		else
+			return false;
+	}
+	
+	// On vérifie les coups possibles d'une unité
 	public void CaseDeplacementUnit(Unite unit) {
 		this.coup_colonne.clear();
 		this.coup_ligne.clear();
 		int ligne = unit.getLigne();
 		int colonne = unit.getColonne();
-		// ici on recupere la case ou se trouve notre unite au clic (x,y)
+		// ici on récupère la case ou se trouve notre unité au clic (x,y)
 		if(ligne%2!=0) {
 			if(ligne != 0) {
 				if(VerifDeplacement(unit,ligne-1,colonne)) {
@@ -191,7 +209,126 @@ public class Plateau {
 		}
 	}
 	
-	// On affecte le deplcament ou l'attaque d'une unite en fonction du choix de l'adversaire
+	public void AttaqueUniteDistance(Unite unit) {
+		int ligne = unit.getLigne();
+		int colonne = unit.getColonne();
+		//Regarde en haut à deux cases
+		if(ligne > 1) {
+			if(VerifAttaqueDistance(unit,ligne-2,colonne)) {
+				this.coup_colonne.add(colonne);
+				this.coup_ligne.add(ligne-2);
+			}
+			if(colonne != 9) {
+				if(VerifAttaqueDistance(unit,ligne-2,colonne+1)) {
+					this.coup_colonne.add(colonne+1);
+					this.coup_ligne.add(ligne-2);
+				}
+			}
+			if(colonne !=0) {
+				if(VerifAttaqueDistance(unit,ligne-2,colonne-1)) {
+					this.coup_colonne.add(colonne-1);
+					this.coup_ligne.add(ligne-2);
+				}
+			}
+		}
+		// Regarde à gauche
+		if(colonne > 1) {
+			if(VerifAttaqueDistance(unit,ligne,colonne-2)) {
+				this.coup_colonne.add(colonne-2);
+				this.coup_ligne.add(ligne);
+			}
+		}
+		// Regarde à droite
+		if(colonne < 8) {
+			if(VerifAttaqueDistance(unit,ligne,colonne+2)) {
+				this.coup_colonne.add(colonne+2);
+				this.coup_ligne.add(ligne);
+			}
+		}
+		// Regarde en bas
+		if(ligne < 8) {
+			if(VerifAttaqueDistance(unit,ligne+2,colonne)) {
+				this.coup_colonne.add(colonne);
+				this.coup_ligne.add(ligne+2);
+			}
+			if(colonne != 9) {
+				if(VerifAttaqueDistance(unit,ligne+2,colonne+1)) {
+					this.coup_colonne.add(colonne+1);
+					this.coup_ligne.add(ligne+2);
+				}
+			}
+			if(colonne != 0) {
+				if(VerifAttaqueDistance(unit,ligne+2,colonne-1)) {
+					this.coup_colonne.add(colonne-1);
+					this.coup_ligne.add(ligne+2);
+				}
+			}
+		}
+		// On regarde les cases en diagonales
+		if(ligne%2==0) {
+			if(ligne !=0) {
+				if(colonne >1) {
+					if(VerifAttaqueDistance(unit,ligne-1,colonne-2)) {
+						this.coup_colonne.add(colonne-2);
+						this.coup_ligne.add(ligne-1);
+					}
+				}
+				if(colonne !=9) {
+					if(VerifAttaqueDistance(unit,ligne-1,colonne+1)) {
+						this.coup_colonne.add(colonne+1);
+						this.coup_ligne.add(ligne-1);
+					}
+				}
+			}
+			if(ligne!=9) {
+				if(colonne >1) {
+					if(VerifAttaqueDistance(unit,ligne+1,colonne-2)) {
+						this.coup_colonne.add(colonne-2);
+						this.coup_ligne.add(ligne+1);
+					}
+				}
+				if(colonne !=9) {
+					if(VerifAttaqueDistance(unit,ligne+1,colonne+1)) {
+						this.coup_colonne.add(colonne+1);
+						this.coup_ligne.add(ligne+1);
+					}
+				}
+			}
+		}
+		else {
+			if(ligne !=0) {
+				if(colonne != 0) {
+					if(VerifAttaqueDistance(unit,ligne-1,colonne-1)) {
+						this.coup_colonne.add(colonne-1);
+						this.coup_ligne.add(ligne-1);
+					}
+				}
+				if(colonne <8) {
+					if(VerifAttaqueDistance(unit,ligne-1,colonne+2)) {
+						this.coup_colonne.add(colonne+2);
+						this.coup_ligne.add(ligne-1);
+					}
+				}
+			}
+			if(ligne!=9) {
+				if(colonne !=0) {
+					if(VerifAttaqueDistance(unit,ligne+1,colonne-1)) {
+						this.coup_colonne.add(colonne-1);
+						this.coup_ligne.add(ligne+1);
+					}
+				}
+				if(colonne <9) {
+					if(VerifAttaqueDistance(unit,ligne+1,colonne+2)) {
+						this.coup_colonne.add(colonne+2);
+						this.coup_ligne.add(ligne+1);
+					}
+				}
+			}
+		}
+		
+	}
+	
+	// On affecte le déplcament ou l'attaque d'une unité en fonction du choix de l'adversaire
 	public void AffecterDeplacement(Unite unit,int choix) {
 			int ligne = this.coup_ligne.get(choix);
 			int colonne = this.coup_colonne.get(choix);
@@ -265,8 +402,10 @@ public class Plateau {
 					nbr_depl ++;
 					plateau.equipe1.liste_unite_equipe.get(i).InfoUnit();
 					plateau.CaseDeplacementUnit(plateau.equipe1.liste_unite_equipe.get(i));
+					if(plateau.equipe1.liste_unite_equipe.get(i) instanceof Archer || plateau.equipe1.liste_unite_equipe.get(i) instanceof Mage)
+						plateau.AttaqueUniteDistance(plateau.equipe1.liste_unite_equipe.get(i));
 					if(plateau.coup_colonne.size()==0 && plateau.coup_ligne.size()==0) {
-						System.out.println("Aucun coup possibles on stop avec cette unite!");
+						System.out.println("Aucun coup possibles on stop avec cette unité!");
 						plateau.equipe1.liste_unite_equipe.get(i).setDepl(20);
 					}
 					else {
@@ -287,7 +426,7 @@ public class Plateau {
 							System.out.println("Vous avez choisi de passer votre tour.");
 							plateau.equipe1.liste_unite_equipe.get(i).setDepl(20);
 							if(nbr_depl==1) {
-								System.out.println("Vous avez choisi de passer votre tour des le debut vous allez donc recuperer des points de vie sur cette unite.");
+								System.out.println("Vous avez choisi de passer votre tour dès le début vous allez donc récupérer des points de vie sur cette unité.");
 								plateau.equipe1.liste_unite_equipe.get(i).Recuperation();
 							}
 						}
@@ -304,8 +443,10 @@ public class Plateau {
 				while(plateau.equipe2.liste_unite_equipe.get(i).getDepl()>0) {
 					nbr_depl++;
 					plateau.CaseDeplacementUnit(plateau.equipe2.liste_unite_equipe.get(i));
+					if(plateau.equipe2.liste_unite_equipe.get(i) instanceof Archer || plateau.equipe2.liste_unite_equipe.get(i) instanceof Mage)
+						plateau.AttaqueUniteDistance(plateau.equipe2.liste_unite_equipe.get(i));
 					if(plateau.coup_colonne.size()==0 && plateau.coup_ligne.size()==0) {
-						System.out.println("Aucun coup possibles on stop avec cette unite!");
+						System.out.println("Aucun coup possibles on stop avec cette unité!");
 						plateau.equipe2.liste_unite_equipe.get(i).setDepl(20);
 					}
 					else {
@@ -326,7 +467,7 @@ public class Plateau {
 							System.out.println("Vous avez choisi de passer votre tour.");
 							plateau.equipe2.liste_unite_equipe.get(i).setDepl(20);
 							if(nbr_depl==1) {
-								System.out.println("Vous avez choisi de passer votre tour des le debut vous allez donc recuperer des points de vie sur cette unite.");
+								System.out.println("Vous avez choisi de passer votre tour dès le début vous allez donc récupérer des points de vie sur cette unité.");
 								plateau.equipe2.liste_unite_equipe.get(i).Recuperation();
 							}
 						}
