@@ -21,7 +21,7 @@ public class InterfacePrincipal implements ActionListener{
     protected JPanel panel;
     protected JLabel label;
     protected ImageIcon image;
-    protected JButton boutton1, boutton2, boutton3;
+    protected JButton boutton1, boutton2, boutton3, boutton4;
     protected Cursor curseur;
     protected InterfacePrincipal _interface;
 
@@ -34,21 +34,26 @@ public class InterfacePrincipal implements ActionListener{
         curseur = new Cursor(Cursor.HAND_CURSOR);
 
         boutton1 = new JButton("JOUEUR VS JOUEUR");
-        ajouterBoutton(boutton1, 320, 300, 300, 50, new Color(128,128,0), Color.WHITE);
+        ajouterBoutton(boutton1, 320, 300, 300, 40, new Color(128,128,0), Color.WHITE);
 
         boutton2 = new JButton("JOUEUR VS IA");
-        ajouterBoutton(boutton2, 320, 400, 300, 50, new Color(128,128,0), Color.WHITE);
+        ajouterBoutton(boutton2, 320, 350, 300, 40, new Color(128,128,0), Color.WHITE);
 
-        boutton3 = new JButton( "QUITTER");
-        ajouterBoutton(boutton3, 320, 500, 300, 50, new Color(128,128,0), Color.WHITE);
+        boutton3 = new JButton("CHARGER UNE PARTIE");
+        ajouterBoutton(boutton3, 320, 410, 300, 40, new Color(128,128,0), Color.WHITE);
+
+        boutton4 = new JButton( "QUITTER");
+        ajouterBoutton(boutton4, 320, 460, 300, 40, new Color(128,128,0), Color.WHITE);
 
 
     }
 
     protected void ajouterFrame(String titre, int largeur, int hauteur)
     {
+        ImageIcon icon = new ImageIcon("wargame.png");
 
         frame = new JFrame(titre);
+        frame.setIconImage(icon.getImage());
         frame.setSize(largeur, hauteur);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -125,6 +130,9 @@ public class InterfacePrincipal implements ActionListener{
         {
         }
         if(obj == boutton3)
+        {
+        }
+        if(obj == boutton4)
         {
             this.cacherFenetre();
             frame.dispose();
