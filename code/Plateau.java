@@ -51,9 +51,9 @@ public class Plateau implements Serializable{
 				}
 			}
 		}
-	}
 
-	/*public void AfficheTerrain() {
+
+	public void AfficheTerrain() {
 	// Pour afficher les terrains, remplacer avec des coordonn�es et des images
 		for(int i=0;i<12;i++) {
 			for(int j=0;j<12;j++) {
@@ -74,7 +74,7 @@ public class Plateau implements Serializable{
 			}
 			System.out.println("");
 		}
-	}*/
+	}
 
 	public void PlaceEquipe(Equipe e1, Equipe e2) {
 		for(int i=0;i<e1.getTailleEquipe();i++) {
@@ -408,8 +408,8 @@ public class Plateau implements Serializable{
 		//arch.Attaquer(inf, 10);
 		//System.out.println("PV inf : " + inf.pv);
 		//inf.Recuperation();
-		plateau.equipe1 = new Equipe(1);
-		plateau.equipe2 = new Equipe(2);
+		plateau.equipe1 = new Equipe(1, "Joueur 1");
+		plateau.equipe2 = new Equipe(2, "Joueur 2");
 		plateau.equipe1.CreationEquipe(l_u.getListe());
 		plateau.equipe2.CreationEquipe(l_u.getListe());
 

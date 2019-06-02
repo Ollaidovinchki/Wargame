@@ -140,9 +140,8 @@ public class InterfacePrincipal implements ActionListener{
      * @return rien.
      */
 
-    protected void ajouterTexte(JLabel texte, String titre, int x, int y, int largeur, int hauteur, int taille, Color couleur)
+    protected void ajouterTexte(JLabel texte, int x, int y, int largeur, int hauteur, int taille, Color couleur)
     {
-        texte = new JLabel(titre);
         texte.setBounds(x, y, largeur, hauteur);
         texte.setForeground(couleur);
         texte.setFont(new Font("elephanta", Font.BOLD | Font.ITALIC, taille));

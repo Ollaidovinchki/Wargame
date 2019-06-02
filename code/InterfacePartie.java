@@ -1,6 +1,7 @@
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Map;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,17 +33,22 @@ import javax.swing.JOptionPane;
 public class InterfacePartie extends InterfacePrincipal implements ActionListener, MouseListener {
 
 
-    public InterfacePartie(){
+    public InterfacePartie(String pseudo1, String pseudo2, String equipe1, String equipe2, int mode_jeu){
+
+
+        //JLabel pseudo_joueur2;
 
         ajouterFrame("Wargame - Jeu", 1400, 900);
         frame.getContentPane().setBackground(Color.WHITE);
         frame.getContentPane().addMouseListener(this);
         ajouterImage("img/plateau.jpg");
-        //ImageIcon plateau = new ImageIcon("img/plateau3.jpg");
-        //label = new JLabel("", plateau, JLabel.LEFT);
-        //frame.add(label);
-
         ajouterPanel(1400, 900);
+
+        JLabel pseudo_joueur1 = new JLabel("Joueur 1 :");
+        ajouterTexte(pseudo_joueur1, 1, 98, 100, 100, 15, Color.BLACK);
+
+        
+
 
 
     }

@@ -22,7 +22,7 @@ public class InterfaceCreationEquipe1 extends InterfacePrincipal implements Acti
 
     private CheckboxGroup checkboxgroup1, checkboxgroup2;
     private Checkbox[] checkboxs;
-    protected JTextField pseudo1, pseudo2;
+    protected JTextField champ_pseudo1, champ_pseudo2;
 
     public InterfaceCreationEquipe1(){
 
@@ -47,11 +47,11 @@ public class InterfaceCreationEquipe1 extends InterfacePrincipal implements Acti
         ajouterCheckbox(new Checkbox("Mage", checkboxgroup2, false), 810, 430, 50, 50, 8);
         ajouterCheckbox(new Checkbox("Chevalier", checkboxgroup2, false), 890, 430, 70, 50, 9);
 
-        pseudo1 = new JTextField(30);
-        ajouterTextField(pseudo1, 540, 110, 250, 50);
+        champ_pseudo1 = new JTextField(30);
+        ajouterTextField(champ_pseudo1, 540, 110, 250, 50);
 
-        pseudo2 = new JTextField(30);
-        ajouterTextField(pseudo2, 540, 170, 250, 50);
+        champ_pseudo2 = new JTextField(30);
+        ajouterTextField(champ_pseudo2, 540, 170, 250, 50);
 
         curseur = new Cursor(Cursor.HAND_CURSOR);
 
@@ -79,19 +79,19 @@ public class InterfaceCreationEquipe1 extends InterfacePrincipal implements Acti
     {
         InterfacePartie interface_jeu;
         Object obj = event.getSource();
-        String champ_pseudo1 = pseudo1.getText().trim();
-        String champ_pseudo2 = pseudo2.getText().trim();
+        String pseudo1 = champ_pseudo1.getText().trim();
+        String pseudo2 = champ_pseudo2.getText().trim();
         String equipe_joueur1 = checkboxgroup1.getSelectedCheckbox().getLabel();
         String equipe_joueur2 = checkboxgroup2.getSelectedCheckbox().getLabel();
 
 
         if(obj == boutton1)
         {
-            if(champ_pseudo1.isEmpty() || champ_pseudo2.isEmpty())
+            if(pseudo1.isEmpty() || pseudo2.isEmpty())
                 JOptionPane.showMessageDialog(frame, "Merci de remplir tous les champs", "Warning", JOptionPane.WARNING_MESSAGE);
             else
                 {
-                    interface_jeu = new InterfacePartie();
+                    interface_jeu = new InterfacePartie(pseudo1, pseudo2, equipe_joueur1, equipe_joueur2, 1);
                     interface_jeu.afficherFenetre();
 
                     this.cacherFenetre();
