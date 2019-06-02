@@ -28,7 +28,7 @@ public class InterfacePrincipal implements ActionListener{
     public InterfacePrincipal(){
 
         ajouterFrame("Wargame - Menu principal", 998, 613);
-        ajouterImage("img1.jpg");
+        ajouterImage("img/img1.jpg");
         ajouterPanel(998, 613);
 
         curseur = new Cursor(Cursor.HAND_CURSOR);
@@ -50,7 +50,7 @@ public class InterfacePrincipal implements ActionListener{
 
     protected void ajouterFrame(String titre, int largeur, int hauteur)
     {
-        ImageIcon icon = new ImageIcon("wargame.png");
+        ImageIcon icon = new ImageIcon("img/wargame.png");
 
         frame = new JFrame(titre);
         frame.setIconImage(icon.getImage());
@@ -91,7 +91,7 @@ public class InterfacePrincipal implements ActionListener{
 
     protected void ajouterBoutton(JButton boutton, int x, int y, int largeur, int hauteur, Color arriere_plan, Color avant_plan)
     {
-        boutton.setFont(new Font("impact", Font.BOLD, 25));
+        boutton.setFont(new Font("impact", Font.PLAIN, 25));
         boutton.setBounds(x, y, largeur, hauteur);
         boutton.setBackground(arriere_plan);
         boutton.setForeground(avant_plan);

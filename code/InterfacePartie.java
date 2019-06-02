@@ -23,7 +23,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
 
         ajouterFrame("Wargame - Jeu", 1400, 774);
 
-        ImageIcon plateau = new ImageIcon("plateau2.jpg");
+        ImageIcon plateau = new ImageIcon("img/plateau2.jpg");
         label = new JLabel("", plateau, JLabel.LEFT);
         frame.add(label);
 

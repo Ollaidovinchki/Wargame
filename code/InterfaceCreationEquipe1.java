@@ -30,7 +30,7 @@ public class InterfaceCreationEquipe1 extends InterfacePrincipal implements Acti
         checkboxs = new Checkbox[10];
 
         ajouterFrame("Wargame - Creation equipes", 998, 613);
-		ajouterImage("img2.jpg");
+		ajouterImage("img/img2.jpg");
         ajouterPanel(998, 613);
 
         ajouterCheckbox(new Checkbox("Archer", checkboxgroup1, true), 25, 430, 60, 50, 0);
@@ -45,10 +45,10 @@ public class InterfaceCreationEquipe1 extends InterfacePrincipal implements Acti
         ajouterCheckbox(new Checkbox("Mage", checkboxgroup2, false), 810, 430, 50, 50, 8);
         ajouterCheckbox(new Checkbox("Chevalier", checkboxgroup2, false), 890, 430, 70, 50, 9);
 
-        pseudo1 = new JTextField();
+        pseudo1 = new JTextField(30);
         ajouterTextField(pseudo1, 540, 110, 250, 50);
 
-        pseudo2 = new JTextField();
+        pseudo2 = new JTextField(30);
         ajouterTextField(pseudo2, 540, 170, 250, 50);
 
         curseur = new Cursor(Cursor.HAND_CURSOR);
@@ -68,6 +68,7 @@ public class InterfaceCreationEquipe1 extends InterfacePrincipal implements Acti
     private void ajouterTextField(JTextField textfield, int x, int y, int largeur, int hauteur)
     {
         textfield.setBounds(x, y, largeur, hauteur);
+        textfield.setFont(new Font("impact", Font.PLAIN, 25));
         panel.add(textfield);
     }
 
