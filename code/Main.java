@@ -5,7 +5,7 @@ public class Main{
 
             InterfacePrincipal menu = new InterfacePrincipal();
             menu.afficherFenetre();
-            
+
             //new InterfaceStock();
     }
 

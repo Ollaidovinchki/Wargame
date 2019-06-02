@@ -1,3 +1,5 @@
+
+
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
@@ -86,7 +88,7 @@ public class InterfaceCreationEquipe1 extends InterfacePrincipal implements Acti
         if(obj == boutton1)
         {
             if(champ_pseudo1.isEmpty() || champ_pseudo2.isEmpty())
-                JOptionPane.showMessageDialog(frame, "Merci de remplir tous les champs");
+                JOptionPane.showMessageDialog(frame, "Merci de remplir tous les champs", "Warning", JOptionPane.WARNING_MESSAGE);
             else
                 {
                     interface_jeu = new InterfacePartie();

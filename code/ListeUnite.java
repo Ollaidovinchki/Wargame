@@ -1,13 +1,12 @@
-package projet_v1;
 
 import java.util.ArrayList;
 
 public class ListeUnite {
 
 	protected ArrayList<Unite> liste_unite = new ArrayList<Unite>();
-	
+
 	public ArrayList<Unite> getListe() { return liste_unite; }
-	
+
 	public ListeUnite() {
 		Infanterie inf = new Infanterie();
 		InfLourde infl = new InfLourde();
