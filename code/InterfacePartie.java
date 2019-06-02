@@ -48,9 +48,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
     }
 
 
-    public Point convertirCaseEnPoint(int ligne, int colonne){
 
-    }
     @Override
     public void mousePressed(MouseEvent e)
     {
