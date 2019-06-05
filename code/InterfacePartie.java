@@ -50,7 +50,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         ajouterFrame("Wargame - Jeu", 1400, 900);
         frame.getContentPane().setBackground(Color.WHITE);
         frame.getContentPane().addMouseListener(this);
-        super.ajouterImage("img/plateau.jpg");
+        //super.ajouterImage("img/plateau.jpg");
         ajouterPanel(1400, 900);
 
         pseudo_joueur1 = new JLabel("Nom : " + pseudo1);
