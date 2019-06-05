@@ -1,21 +1,21 @@
 import java.util.Scanner;
 public class ConvertirPoint{
   public static int[] ConvertirPoint(int ligne, int col){             
-	  int coordonnÃ©es[] = {0,0};
+	  int coordonnées[] = {0,0};
 	  if(ligne%2==0)
 	  {
-		  coordonnÃ©es[0]=12+ col*60;
-		  coordonnÃ©es[1]=65+ ligne*50;
+		  coordonnées[0]=12+ col*60;
+		  coordonnées[1]=65+ ligne*50;
 	  }
 	  else
 	  {
-		  coordonnÃ©es[0]=42+ col*60;
-		  coordonnÃ©es[1]=115+ (ligne-1)*50;
+		  coordonnées[0]=42+ col*60;
+		  coordonnées[1]=115+ (ligne-1)*50;
 	  }
-	  return coordonnÃ©es;
+	  return coordonnées;
   }   
-  public static int[] ConvertirCoordonnÃ©es(int x, int y){             
-	  int coordonnÃ©es[] = {0,0};
+  public static int[] ConvertirCoordonnées(int x, int y){             
+	  int coordonnées[] = {0,0};
 	  int i,j;
 	  for(i=0;i<12;i++)
 	  {
@@ -25,23 +25,23 @@ public class ConvertirPoint{
 			  {
 				  if ((x>=(12 + 60*i) && x<=(70 +60*i)  && y>=(80+50*j) && y<=(112+50*j) ))
 				  {
-					coordonnÃ©es[0]=i;
-					coordonnÃ©es[1]=j;
-					return coordonnÃ©es;
+					coordonnées[0]=i;
+					coordonnées[1]=j;
+					return coordonnées;
 				  }
 			  }
 			  else
 			  {
 				  if ((x>=(42 + 60*i) && x<=(100 +60*i)  && y>=(130+50*j) && y<=(162+50*j) ))
 				  {
-					coordonnÃ©es[0]=i;
-					coordonnÃ©es[1]=j;
-					return coordonnÃ©es;
+					coordonnées[0]=i;
+					coordonnées[1]=j;
+					return coordonnées;
 				  } 
 			  }
 		  }
 	  }
-	  return coordonnÃ©es;
+	  return coordonnées;
   }   
   public static void main(String[] args) {
 	  Scanner sc = new Scanner(System.in);
@@ -50,7 +50,7 @@ public class ConvertirPoint{
 	  System.out.print( "entrer y");
 	  int str2 = sc.nextInt();
 	  int testcoord[]= {0,0};
-	  testcoord=ConvertirCoordonnÃ©es(str,str2);
+	  testcoord=ConvertirCoordonnées(str,str2);
 	  System.out.println("Ligne:"+testcoord[0]+"Colonne :"+testcoord[1]); 
 	  System.out.print( "entrer i");
 	  int str3 = sc.nextInt();
