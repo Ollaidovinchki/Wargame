@@ -36,6 +36,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
     protected JLabel pseudo_joueur2, unite_joueur2, label_unite_joueur2;
     protected ImageIcon image_unite1, image_unite2;
     protected Plateau plateau;
+    protected ListeUnite l_u;
     protected Controlleur controleur;
 
 
@@ -44,7 +45,15 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
     {
 
         Dimension dimension_image;
+
+        l_u = new ListeUnite();
+
         plateau = new Plateau(new ListeTerrain());
+        plateau.setEquipes(new Equipe(1), new Equipe(2));
+        plateau.getEquipe1().CreationEquipe(l_u.getListe(), getIDUnite(equipe1));
+        plateau.getEquipe2().CreationEquipe(l_u.getListe(), getIDUnite(equipe2));
+        plateau.PlaceEquipe(plateau.getEquipe1(),plateau.getEquipe2());
+
         controleur = new Controlleur();
 
         ajouterFrame("Wargame - Jeu", 1400, 900);
@@ -73,7 +82,6 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
 
 
     }
-
 
 
     private void afficherPlateau()
@@ -109,6 +117,22 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         panel.add(label_unite_joueur);
     }
 
+
+    private int getIDUnite(String unite)
+    {
+        if(unite.equals("I. legere"))
+            return 0;
+		if(unite.equals("I. lourde"))
+            return 1;
+		if(unite.equals("Chevalier"))
+            return 2;
+		if(unite.equals("Mage"))
+	       return 3;
+	    if(unite.equals("Archer"))
+            return 4;
+
+        return -1;
+    }
 
     private String getCheminImageUnite(String unite)
     {

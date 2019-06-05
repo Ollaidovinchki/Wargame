@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,18 +15,17 @@ public class Plateau implements Serializable{
 	protected final int nb_ligne = 12;
 	protected final int nb_colonne = 12;
 	protected Case_hexagonales t_jeu[][] = new Case_hexagonales[nb_ligne][nb_colonne];
-
 	protected Equipe equipe1;
 	protected Equipe equipe2;
 	protected ArrayList<Integer> coup_ligne = new ArrayList<Integer>();
 	protected ArrayList<Integer> coup_colonne = new ArrayList<Integer>();
-	
+
 	Plateau(ListeTerrain liste_t) {
 		Random rnd = new Random();
 		int alea = 0;
-		// Attention, toutes les case de même type (exemple tous les montagnes vont etre modifié
-		for(int i=0;i<12;i++) {
-			for(int j=0;j<12;j++) {
+		// Attention, toutes les case de mï¿½me type (exemple tous les montagnes vont etre modifiï¿½
+		for(int i=0;i<nb_ligne;i++) {
+			for(int j=0;j<nb_colonne;j++) {
 				alea = rnd.nextInt(7);
 				if(alea == 1) {
 					Colline c = new Colline();
@@ -53,7 +51,9 @@ public class Plateau implements Serializable{
 				}
 			}
 		}
+
 	}
+
 
 	public int getNombreLigne()
 	{
@@ -70,11 +70,27 @@ public class Plateau implements Serializable{
 		return t_jeu;
 	}
 
-	
-	public void AfficheTerrain() {
-	// Pour afficher les terrains, remplacer avec des coordonnées et des images	
-		for(int i=0;i<12;i++) {
-			for(int j=0;j<12;j++) {
+	public void setEquipes(Equipe equipe1, Equipe equipe2)
+	{
+		this.equipe1 = equipe1;
+		this.equipe2 = equipe2;
+	}
+
+
+	public Equipe getEquipe1()
+	{
+		return equipe1;
+	}
+
+
+	public Equipe getEquipe2()
+	{
+		return equipe2;
+	}
+	/*public void AfficheTerrain() {
+	// Pour afficher les terrains, remplacer avec des coordonnï¿½es et des images
+		for(int i=0;i<10;i++) {
+			for(int j=0;j<10;j++) {
 				if(this.t_jeu[i][j] instanceof Colline)
 					System.out.print(1);
 				else if(this.t_jeu[i][j] instanceof Eau_profonde)
@@ -92,8 +108,8 @@ public class Plateau implements Serializable{
 			}
 			System.out.println("");
 		}
-	}
-	
+	}*/
+
 	public void PlaceEquipe(Equipe e1, Equipe e2) {
 		for(int i=0;i<e1.getTailleEquipe();i++) {
 			this.t_jeu[0][2+i].setEtatCase(1);
@@ -106,58 +122,58 @@ public class Plateau implements Serializable{
 			e2.liste_unite_equipe.get(j).setLigne(9);
 		}
 	}
-	
-	public void AffUnite() {
-		for(int i=0;i<12;i++) {
+
+	/*public void AffUnite() {
+		for(int i=0;i<10;i++) {
 			if(i%2!=0)
 				System.out.print(" ");
-			for(int j=0;j<12;j++) {
+			for(int j=0;j<10;j++) {
 					System.out.print(this.t_jeu[i][j].getEtatCase());
 			}
 			System.out.println("");
 		}
-	}
-	
-	
+	}*/
+
+
 	public boolean VerifDeplacement(Unite unit,int ligne,int colonne) {
 		int pd = this.t_jeu[ligne][colonne].getPoint_deplacement();
 		int u_equipe = unit.getEquipe();
 		if(unit.getDepl() >= pd ){
 			if(this.t_jeu[ligne][colonne].getEtatCase()==0)
 				return true; // Deplacement possible sur cette case
-			else if(this.t_jeu[ligne][colonne].getEtatCase() != u_equipe) 
+			else if(this.t_jeu[ligne][colonne].getEtatCase() != u_equipe)
 				return true; // Attaquer la cible
-			else 
+			else
 				return false;
 		}
 		else
 			return false;
 	}
-	
+
 	public boolean VerifAttaqueDistance(Unite unit,int ligne,int colonne) {
 		int pd = this.t_jeu[ligne][colonne].getPoint_deplacement();
 		int u_equipe = unit.getEquipe();
 		if(unit.getDepl() >= pd ){
 			if(this.t_jeu[ligne][colonne].getEtatCase()==0)
 				return false; // Deplacement possible sur cette case
-			else if(this.t_jeu[ligne][colonne].getEtatCase() != u_equipe) { 
-				System.out.println("Attaque à distance possible!");
+			else if(this.t_jeu[ligne][colonne].getEtatCase() != u_equipe) {
+				System.out.println("Attaque ï¿½ distance possible!");
 				return true; // Attaquer la cible
 			}
-			else 
+			else
 				return false;
 		}
 		else
 			return false;
 	}
-	
-	// On vérifie les coups possibles d'une unité
+
+	// On vï¿½rifie les coups possibles d'une unitï¿½
 	public void CaseDeplacementUnit(Unite unit) {
 		this.coup_colonne.clear();
 		this.coup_ligne.clear();
 		int ligne = unit.getLigne();
 		int colonne = unit.getColonne();
-		// ici on récupère la case ou se trouve notre unité au clic (x,y)
+		// ici on rï¿½cupï¿½re la case ou se trouve notre unitï¿½ au clic (x,y)
 		if(ligne%2!=0) {
 			if(ligne != 0) {
 				if(VerifDeplacement(unit,ligne-1,colonne)) {
@@ -234,11 +250,11 @@ public class Plateau implements Serializable{
 			}
 		}
 	}
-	
+
 	public void AttaqueUniteDistance(Unite unit) {
 		int ligne = unit.getLigne();
 		int colonne = unit.getColonne();
-		//Regarde en haut à deux cases
+		//Regarde en haut ï¿½ deux cases
 		if(ligne > 1) {
 			if(VerifAttaqueDistance(unit,ligne-2,colonne)) {
 				this.coup_colonne.add(colonne);
@@ -257,14 +273,14 @@ public class Plateau implements Serializable{
 				}
 			}
 		}
-		// Regarde à gauche
+		// Regarde ï¿½ gauche
 		if(colonne > 1) {
 			if(VerifAttaqueDistance(unit,ligne,colonne-2)) {
 				this.coup_colonne.add(colonne-2);
 				this.coup_ligne.add(ligne);
 			}
 		}
-		// Regarde à droite
+		// Regarde ï¿½ droite
 		if(colonne < 10) {
 			if(VerifAttaqueDistance(unit,ligne,colonne+2)) {
 				this.coup_colonne.add(colonne+2);
@@ -306,7 +322,7 @@ public class Plateau implements Serializable{
 					}
 				}
 			}
-			if(ligne!=9) {
+			if(ligne!=11) {
 				if(colonne >1) {
 					if(VerifAttaqueDistance(unit,ligne+1,colonne-2)) {
 						this.coup_colonne.add(colonne-2);
@@ -336,7 +352,7 @@ public class Plateau implements Serializable{
 					}
 				}
 			}
-			if(ligne!=9) {
+			if(ligne!=11) {
 				if(colonne !=0) {
 					if(VerifAttaqueDistance(unit,ligne+1,colonne-1)) {
 						this.coup_colonne.add(colonne-1);
@@ -351,14 +367,14 @@ public class Plateau implements Serializable{
 				}
 			}
 		}
-		
+
 	}
-	
-	// On affecte le déplcament ou l'attaque d'une unité en fonction du choix de l'adversaire
+
+	// On affecte le dï¿½plcament ou l'attaque d'une unitï¿½ en fonction du choix de l'adversaire
 	public void AffecterDeplacement(Unite unit,int choix) {
 			int ligne = this.coup_ligne.get(choix);
 			int colonne = this.coup_colonne.get(choix);
-			
+
 			if(this.t_jeu[ligne][colonne].getEtatCase()!=0 && this.t_jeu[ligne][colonne].getEtatCase()!=unit.getEquipe()) {
 				if(unit.getEquipe()==this.equipe1.getId()) {
 					for(int i=0;i<this.equipe2.getListeEquipe().size();i++) {
@@ -390,25 +406,25 @@ public class Plateau implements Serializable{
 				unit.setLigne(ligne);
 				unit.setColonne(colonne);
 			}
-			
+
 		}
-	
+
 	public void Sauvegarder() throws IOException {
 		File fichier = new File("save_pvp.ser");
 		ObjectOutputStream oos =  new ObjectOutputStream(new FileOutputStream(fichier)) ;
 		oos.writeObject(this);
 	}
-	
+
 	public void SauvegarderIA() throws IOException {
 		File fichier = new File("save_ia.ser");
 		ObjectOutputStream oos =  new ObjectOutputStream(new FileOutputStream(fichier)) ;
 		oos.writeObject(this);
 	}
-	
-	
+
+
 	////////////////////////////
 	//SAUVEGARDE DE LA PARTIE
-	/* 
+	/*
 	File fichier = new File("save1.ser");
 	ObjectOutputStream oos =  new ObjectOutputStream(new FileOutputStream(fichier)) ;
 	oos.writeObject(plateau);
@@ -416,12 +432,12 @@ public class Plateau implements Serializable{
 	////////////////////////////
 	////////////////////////////
 	// CHARGEMENT D'UN FICHIER SAUVEGARDE
-	/* 
+	/*
 	File fichier = new File("save1.ser");
 	ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;
 	plateau =(Plateau)ois.readObject();
 	*/
-	
+
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 		ListeTerrain liste_t = new ListeTerrain();
 		Archer arch = new Archer();
@@ -430,11 +446,11 @@ public class Plateau implements Serializable{
 		ListeUnite l_u = new ListeUnite();
 		int save_depl = 0;
 		int nbr_depl = 0;
-		
+
 		Plateau plateau = new Plateau(liste_t);
 		//plateau.AfficheTerrain();
 		//plateau.AffUnite();
-		
+
 		Scanner ia = new Scanner(System.in);
 		int test = 0;
 		do {
@@ -442,7 +458,7 @@ public class Plateau implements Serializable{
 			System.out.println("choix : ");
 			test = ia.nextInt();
 		}while(test<1 || test >2);
-		
+
 		if(test ==2) {
 			Scanner s = new Scanner(System.in);
 			int charger=0;
@@ -451,17 +467,17 @@ public class Plateau implements Serializable{
 				System.out.println("choix : ");
 				charger = s.nextInt();
 			}while(charger<0 || charger >1);
-			
-			//plateau.equipe1 = new Equipe(1);
-			//plateau.equipe2 = new Equipe(2);
-			
+
+			plateau.equipe1 = new Equipe(1);
+			plateau.equipe2 = new Equipe(2);
+
 			/////////////////////////////////////////////////////////////////////////
 			// CHARGEMENT EN DEHORS DE TOUTES FONCTIONS SINON CELA NE MARCHE PAS !!!
 			/////////////////////////////////////////////////////////////////////////
 			if(charger==0) {
-				plateau.equipe1.CreationEquipe(l_u.getListe());
-				plateau.equipe2.CreationEquipe(l_u.getListe());
-				plateau.PlaceEquipe(plateau.equipe1,plateau.equipe2);
+				//plateau.equipe1.CreationEquipe(l_u.getListe());
+				//plateau.equipe2.CreationEquipe(l_u.getListe());
+				//plateau.PlaceEquipe(plateau.equipe1,plateau.equipe2);
 			}else {
 				try {
 					File fichier = new File("save_pvp.ser");
@@ -471,12 +487,12 @@ public class Plateau implements Serializable{
 					e.printStackTrace();
 				}
 			}
-			plateau.AffUnite();
+			//plateau.AffUnite();
 			while(plateau.equipe1.liste_unite_equipe.size()!=0 && plateau.equipe2.liste_unite_equipe.size()!=0) {
-				
+
 				for(int i=0;i<plateau.equipe1.liste_unite_equipe.size();i++) {
 					save_depl = plateau.equipe1.liste_unite_equipe.get(i).getDepl();
-					
+
 					while(plateau.equipe1.liste_unite_equipe.get(i).getDepl()>0) {
 						nbr_depl ++;
 						plateau.equipe1.liste_unite_equipe.get(i).InfoUnit();
@@ -484,7 +500,7 @@ public class Plateau implements Serializable{
 						if(plateau.equipe1.liste_unite_equipe.get(i) instanceof Archer || plateau.equipe1.liste_unite_equipe.get(i) instanceof Mage)
 							plateau.AttaqueUniteDistance(plateau.equipe1.liste_unite_equipe.get(i));
 						if(plateau.coup_colonne.size()==0 && plateau.coup_ligne.size()==0) {
-							System.out.println("Aucun coup possibles on stop avec cette unité!");
+							System.out.println("Aucun coup possibles on stop avec cette unitï¿½!");
 							plateau.equipe1.liste_unite_equipe.get(i).setDepl(20);
 						}
 						else {
@@ -506,27 +522,27 @@ public class Plateau implements Serializable{
 								System.out.println("Vous avez choisi de passer votre tour.");
 								plateau.equipe1.liste_unite_equipe.get(i).setDepl(20);
 								if(nbr_depl==1) {
-									System.out.println("Vous avez choisi de passer votre tour dès le début vous allez donc récupérer des points de vie sur cette unité.");
+									System.out.println("Vous avez choisi de passer votre tour dï¿½s le dï¿½but vous allez donc rï¿½cupï¿½rer des points de vie sur cette unitï¿½.");
 									plateau.equipe1.liste_unite_equipe.get(i).Recuperation();
 								}
 							}
 						}
-						plateau.AffUnite();
+						//plateau.AffUnite();
 					}
 					nbr_depl = 0;
 					plateau.equipe1.liste_unite_equipe.get(i).ReinitialiseDepl(save_depl);
 				}
-				
+
 				for(int i=0;i<plateau.equipe2.liste_unite_equipe.size();i++) {
 					save_depl = plateau.equipe2.liste_unite_equipe.get(i).getDepl();
-					
+
 					while(plateau.equipe2.liste_unite_equipe.get(i).getDepl()>0) {
 						nbr_depl++;
 						plateau.CaseDeplacementUnit(plateau.equipe2.liste_unite_equipe.get(i));
 						if(plateau.equipe2.liste_unite_equipe.get(i) instanceof Archer || plateau.equipe2.liste_unite_equipe.get(i) instanceof Mage)
 							plateau.AttaqueUniteDistance(plateau.equipe2.liste_unite_equipe.get(i));
 						if(plateau.coup_colonne.size()==0 && plateau.coup_ligne.size()==0) {
-							System.out.println("Aucun coup possibles on stop avec cette unité!");
+							System.out.println("Aucun coup possibles on stop avec cette unitï¿½!");
 							plateau.equipe2.liste_unite_equipe.get(i).setDepl(20);
 						}
 						else {
@@ -547,12 +563,12 @@ public class Plateau implements Serializable{
 								System.out.println("Vous avez choisi de passer votre tour.");
 								plateau.equipe2.liste_unite_equipe.get(i).setDepl(20);
 								if(nbr_depl==1) {
-									System.out.println("Vous avez choisi de passer votre tour dès le début vous allez donc récupérer des points de vie sur cette unité.");
+									System.out.println("Vous avez choisi de passer votre tour dï¿½s le dï¿½but vous allez donc rï¿½cupï¿½rer des points de vie sur cette unitï¿½.");
 									plateau.equipe2.liste_unite_equipe.get(i).Recuperation();
 								}
 							}
 						}
-						plateau.AffUnite();
+						//plateau.AffUnite();
 					}
 					nbr_depl = 0;
 					plateau.equipe2.liste_unite_equipe.get(i).ReinitialiseDepl(save_depl);
@@ -560,7 +576,7 @@ public class Plateau implements Serializable{
 			}
 			System.out.println("Fin de la partie !");
 		}else {
-			
+
 			Scanner s = new Scanner(System.in);
 			int charger=0;
 			do {
@@ -568,16 +584,16 @@ public class Plateau implements Serializable{
 				System.out.println("choix : ");
 				charger = s.nextInt();
 			}while(charger<0 || charger >1);
-			
-			//plateau.equipe1 = new Equipe(1);
-			//plateau.equipe2 = new Equipe(2);
-			
+
+			plateau.equipe1 = new Equipe(1);
+			plateau.equipe2 = new Equipe(2);
+
 			/////////////////////////////////////////////////////////////////////////
 			// CHARGEMENT EN DEHORS DE TOUTES FONCTIONS SINON CELA NE MARCHE PAS !!!
 			/////////////////////////////////////////////////////////////////////////
 			if(charger==0) {
-				plateau.equipe1.CreationEquipe(l_u.getListe());
-				plateau.equipe2.CreationEquipe(l_u.getListe());
+				//plateau.equipe1.CreationEquipe(l_u.getListe());
+				//plateau.equipe2.CreationEquipe(l_u.getListe());
 				plateau.PlaceEquipe(plateau.equipe1,plateau.equipe2);
 			}else {
 				try {
@@ -588,12 +604,12 @@ public class Plateau implements Serializable{
 					e.printStackTrace();
 				}
 			}
-			plateau.AffUnite();
+			//plateau.AffUnite();
 			while(plateau.equipe1.liste_unite_equipe.size()!=0 && plateau.equipe2.liste_unite_equipe.size()!=0) {
-				
+
 				for(int i=0;i<plateau.equipe1.liste_unite_equipe.size();i++) {
 					save_depl = plateau.equipe1.liste_unite_equipe.get(i).getDepl();
-					
+
 					while(plateau.equipe1.liste_unite_equipe.get(i).getDepl()>0) {
 						nbr_depl ++;
 						plateau.equipe1.liste_unite_equipe.get(i).InfoUnit();
@@ -601,7 +617,7 @@ public class Plateau implements Serializable{
 						if(plateau.equipe1.liste_unite_equipe.get(i) instanceof Archer || plateau.equipe1.liste_unite_equipe.get(i) instanceof Mage)
 							plateau.AttaqueUniteDistance(plateau.equipe1.liste_unite_equipe.get(i));
 						if(plateau.coup_colonne.size()==0 && plateau.coup_ligne.size()==0) {
-							System.out.println("Aucun coup possibles on stop avec cette unité!");
+							System.out.println("Aucun coup possibles on stop avec cette unitï¿½!");
 							plateau.equipe1.liste_unite_equipe.get(i).setDepl(20);
 						}
 						else {
@@ -623,27 +639,27 @@ public class Plateau implements Serializable{
 								System.out.println("Vous avez choisi de passer votre tour.");
 								plateau.equipe1.liste_unite_equipe.get(i).setDepl(20);
 								if(nbr_depl==1) {
-									System.out.println("Vous avez choisi de passer votre tour dès le début vous allez donc récupérer des points de vie sur cette unité.");
+									System.out.println("Vous avez choisi de passer votre tour dï¿½s le dï¿½but vous allez donc rï¿½cupï¿½rer des points de vie sur cette unitï¿½.");
 									plateau.equipe1.liste_unite_equipe.get(i).Recuperation();
 								}
 							}
 						}
-						plateau.AffUnite();
+						//plateau.AffUnite();
 					}
 					nbr_depl = 0;
 					plateau.equipe1.liste_unite_equipe.get(i).ReinitialiseDepl(save_depl);
 				}
-				
+
 				for(int i=0;i<plateau.equipe2.liste_unite_equipe.size();i++) {
 					save_depl = plateau.equipe2.liste_unite_equipe.get(i).getDepl();
-					
+
 					while(plateau.equipe2.liste_unite_equipe.get(i).getDepl()>0) {
 						nbr_depl++;
 						plateau.CaseDeplacementUnit(plateau.equipe2.liste_unite_equipe.get(i));
 						if(plateau.equipe2.liste_unite_equipe.get(i) instanceof Archer || plateau.equipe2.liste_unite_equipe.get(i) instanceof Mage)
 							plateau.AttaqueUniteDistance(plateau.equipe2.liste_unite_equipe.get(i));
 						if(plateau.coup_colonne.size()==0 && plateau.coup_ligne.size()==0) {
-							System.out.println("Aucun coup possibles on stop avec cette unité!");
+							System.out.println("Aucun coup possibles on stop avec cette unitï¿½!");
 							plateau.equipe2.liste_unite_equipe.get(i).setDepl(20);
 						}
 						else {
@@ -651,7 +667,7 @@ public class Plateau implements Serializable{
 							int choix=1;
 							plateau.AffecterDeplacement(plateau.equipe2.liste_unite_equipe.get(i), choix-1);
 						}
-						plateau.AffUnite();
+						//plateau.AffUnite();
 					}
 					nbr_depl = 0;
 					plateau.equipe2.liste_unite_equipe.get(i).ReinitialiseDepl(save_depl);
@@ -661,4 +677,3 @@ public class Plateau implements Serializable{
 		}
 	}
 }
-            

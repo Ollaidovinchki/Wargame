@@ -5,13 +5,11 @@ import java.util.Scanner;
 
 public class Equipe implements Serializable{
 
-	protected String nom;
 	protected int id;
 	protected ArrayList<Unite> liste_unite_equipe = new ArrayList<Unite>();
 
-	public Equipe(int i, String nom) {
+	public Equipe(int i) {
 		this.id=i;
-		this.nom = nom;
 	}
 
 	public int getId() { return this.id; }
@@ -20,53 +18,49 @@ public class Equipe implements Serializable{
 
 	public int getTailleEquipe() { return this.liste_unite_equipe.size(); }
 
-	public void CreationEquipe(ArrayList<Unite> liste) {
+	public void CreationEquipe(ArrayList<Unite> liste, int choix) {
 
-		int taille_equipe = 0;
+		Unite unite;
 		int taille_max = 3;
-		int choix;
 
-		//Affichage de toutes les unit�s
-		this.AfficheListeChoix(liste);
+		for(int i=0; i<taille_max; i++)
+		{	if(choix==0)
+			{
+				unite = new Infanterie();
+				unite.setEquipe(this.id);
+				this.liste_unite_equipe.add(unite);
+			}
+			else if(choix == 1)
+			{
+				unite = new InfLourde();
+				unite.setEquipe(this.id);
+				this.liste_unite_equipe.add(unite);
+			}
+			else if(choix == 2)
+			{
+				unite = new Cavalerie();
+				unite.setEquipe(this.id);
+				this.liste_unite_equipe.add(unite);
+			}
+			else if(choix == 3)
+			{
+				unite = new Mage();
+				unite.setEquipe(this.id);
+				this.liste_unite_equipe.add(unite);
+			}
+			else if(choix == 4)
+			{
+				unite = new Archer();
+				unite.setEquipe(this.id);
+				this.liste_unite_equipe.add(unite);
+			}
 
-		do {
-			//Selection d'une unite
-			choix = SelectionUnite();
-			if(choix==0) {
-				Infanterie inf = new Infanterie();
-				inf.setEquipe(this.id);
-				this.liste_unite_equipe.add(inf);
-			}
-			else if(choix == 1) {
-				InfLourde infl = new InfLourde();
-				infl.setEquipe(this.id);
-				this.liste_unite_equipe.add(infl);
-			}
-			else if(choix == 2) {
-				Cavalerie cav = new Cavalerie();
-				cav.setEquipe(this.id);
-				this.liste_unite_equipe.add(cav);
-			}
-			else if(choix == 3) {
-				Mage mage = new Mage();
-				mage.setEquipe(this.id);
-				this.liste_unite_equipe.add(mage);
-			}
-			else if(choix == 4) {
-				Archer arc = new Archer();
-				arc.setEquipe(this.id);
-				this.liste_unite_equipe.add(arc);
-			}
+		}
 
-			taille_equipe += 1;
-
-		}while(taille_equipe < taille_max);
-		System.out.println("Votre �quipe est maintenant compl�te!");
-		this.AfficheListeChoix(this.liste_unite_equipe);
 	}
 
 	//Affichage d'une liste d'unite
-	public void AfficheListeChoix(ArrayList<Unite> liste_choix) {
+	/*public void AfficheListeChoix(ArrayList<Unite> liste_choix) {
 
 		for(int i=0;i<liste_choix.size();i++) {
 			System.out.print(i +")"+"Type : " + liste_choix.get(i).getType());
@@ -77,7 +71,7 @@ public class Equipe implements Serializable{
 			System.out.println(" / Vision : " + liste_choix.get(i).getVision());
 		}
 		System.out.println();
-	}
+	}*/
 
 	public int SelectionUnite() {
 		int choix;
