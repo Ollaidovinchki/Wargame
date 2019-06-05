@@ -33,8 +33,9 @@ public class Controlleur
          {
              if(i%2==0)
              {
-                 if ((x>=(311 + 62*i) && x<=(358 +62*i)  && y>=(95+55*j) && y<=(135+55*j) ))
+                 if ((x>=(311 + 62*j) && x<=(369 +62*j)  && y>=(111+55*i) && y<=(142+55*i) ))
                  {
+                	 System.out.println("pair" );
                    coordonnees[0]=i;
                    coordonnees[1]=j;
                    return coordonnees;
@@ -42,8 +43,9 @@ public class Controlleur
              }
              else
              {
-                 if ((x>=(341 + 62*i) && x<=(398 +62*i)  && y>=(148+55*j) && y<=(188+55*j) ))
+                 if ((x>=(341 + 62*j) && x<=(399 +62*j)  && y>=(166+55*(i-1)) && y<=(197+55*(i-1)) ))
                  {
+                 System.out.println("impair" );
                    coordonnees[0]=i;
                    coordonnees[1]=j;
                    return coordonnees;
