@@ -31,7 +31,7 @@ import javax.swing.JOptionPane;
 
 public class InterfacePartie extends InterfacePrincipal implements ActionListener, MouseListener {
 
-
+    protected JLabel label_wargame;
     protected JLabel pseudo_joueur1, unite_joueur1, label_unite_joueur1,
                      label_PV_joueur1, label_attaque_joueur1,
                      label_defense_joueur1, label_depl_joueur1,
@@ -50,6 +50,10 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
                            String equipe2, int mode_jeu)
     {
 
+        //boutton3 = new JButton("CHARGER UNE PARTIE");
+        //ajouterBoutton(boutton3, 320, 410, 300, 40, new Color(128,128,0), Color.WHITE);
+
+
         Dimension dimension_image;
 
         l_u = new ListeUnite();
@@ -67,6 +71,16 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         frame.getContentPane().addMouseListener(this);
         super.ajouterImage("img/plateau.jpg");
         ajouterPanel(1400, 900);
+
+
+        boutton1 = new JButton("Sauvegarder");
+        ajouterBoutton(boutton1, 330, 800, 200, 30, new Color(128,128,0), Color.WHITE);
+
+        boutton2 = new JButton("Aide");
+        ajouterBoutton(boutton2, 900, 800, 200, 30, new Color(128,128,0), Color.WHITE);
+
+        label_wargame = new JLabel("WARGAME");
+        ajouterTexte(label_wargame, 550,0, 300, 100, 50, Color.BLACK);
 
         pseudo_joueur1 = new JLabel("Nom : " + pseudo1);
         unite_joueur1 = new JLabel("Unite : " + equipe1);
@@ -104,7 +118,6 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
                             dimension_image.width, dimension_image.height);
 
         afficherPlateau();
-
 
 
     }
