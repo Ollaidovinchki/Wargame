@@ -25,34 +25,34 @@ public class Controlleur
   }
 
   public int[] ConvertirCoordonneesEnCase(int x, int y){
-	  int coordonnees[] = {0,0};
-	  int i,j;
-	  for(i=0;i<12;i++)
-	  {
-		  for(j=0;j<12;j++)
-		  {
-			  if(i%2==0)
-			  {
-				  if ((x>=(12 + 60*i) && x<=(70 +60*i)  && y>=(80+50*j) && y<=(112+50*j) ))
-				  {
-					coordonnees[0]=i;
-					coordonnees[1]=j;
-					return coordonnees;
-				  }
-			  }
-			  else
-			  {
-				  if ((x>=(42 + 60*i) && x<=(100 +60*i)  && y>=(130+50*j) && y<=(162+50*j) ))
-				  {
-					coordonnees[0]=i;
-					coordonnees[1]=j;
-					return coordonnees;
-				  }
-			  }
-		  }
-	  }
-	  return coordonnees;
-  }
+     int coordonnees[] = {0,0};
+     int i,j;
+     for(i=0;i<12;i++)
+     {
+         for(j=0;j<12;j++)
+         {
+             if(i%2==0)
+             {
+                 if ((x>=(311 + 62*i) && x<=(358 +62*i)  && y>=(95+55*j) && y<=(135+55*j) ))
+                 {
+                   coordonnees[0]=i;
+                   coordonnees[1]=j;
+                   return coordonnees;
+                 }
+             }
+             else
+             {
+                 if ((x>=(341 + 62*i) && x<=(398 +62*i)  && y>=(148+55*j) && y<=(188+55*j) ))
+                 {
+                   coordonnees[0]=i;
+                   coordonnees[1]=j;
+                   return coordonnees;
+                 }
+             }
+         }
+     }
+     return coordonnees;
+}
 
 
 

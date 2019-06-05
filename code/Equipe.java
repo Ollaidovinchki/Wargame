@@ -73,7 +73,7 @@ public class Equipe implements Serializable{
 		System.out.println();
 	}*/
 
-	public int SelectionUnite() {
+	/*public int SelectionUnite() {
 		int choix;
 		Scanner sc = new Scanner(System.in);
 
@@ -82,5 +82,5 @@ public class Equipe implements Serializable{
 			choix = sc.nextInt();
 		}while(choix<0 || choix>=5);
 		return choix;
-	}
+	}*/
 }

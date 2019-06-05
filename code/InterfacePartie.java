@@ -32,8 +32,14 @@ import javax.swing.JOptionPane;
 public class InterfacePartie extends InterfacePrincipal implements ActionListener, MouseListener {
 
 
-    protected JLabel pseudo_joueur1, unite_joueur1, label_unite_joueur1;
-    protected JLabel pseudo_joueur2, unite_joueur2, label_unite_joueur2;
+    protected JLabel pseudo_joueur1, unite_joueur1, label_unite_joueur1,
+                     label_PV_joueur1, label_attaque_joueur1,
+                     label_defense_joueur1, label_depl_joueur1,
+                     label_vision_joueur1;
+    protected JLabel pseudo_joueur2, unite_joueur2, label_unite_joueur2,
+                     label_PV_joueur2, label_attaque_joueur2,
+                     label_defense_joueur2, label_depl_joueur2,
+                     label_vision_joueur2;
     protected ImageIcon image_unite1, image_unite2;
     protected Plateau plateau;
     protected ListeUnite l_u;
@@ -67,15 +73,35 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         image_unite1 = new ImageIcon(getCheminImageUnite(equipe1));
         label_unite_joueur1 = new JLabel(image_unite1);
         dimension_image = label_unite_joueur1.getPreferredSize();
+        label_PV_joueur1 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe1)).getPV());
+        label_attaque_joueur1 = new JLabel("P. attaque : " + l_u.getListe().get(getIDUnite(equipe1)).getP_att());
+        label_defense_joueur1 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe1)).getP_def());
+        label_depl_joueur1 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe1)).getDepl());
+        label_vision_joueur1 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe1)).getVision());
+
         ajouterInfoJoueur(pseudo_joueur1, unite_joueur1, label_unite_joueur1,
-                          1, 98, 1, 125, 100, 225, dimension_image.width,
+                          label_PV_joueur1, label_attaque_joueur1, label_defense_joueur1,
+                          label_depl_joueur1, label_vision_joueur1, 1, 98, 1, 118, 10, 80,
+                          1, 138, 1, 158, 1, 178, 1, 198, 1, 226,dimension_image.width,
                           dimension_image.height);
 
 
+         pseudo_joueur2 = new JLabel("Nom : " + pseudo2);
+         unite_joueur2 = new JLabel("Unite : " + equipe2);
+         image_unite2 = new ImageIcon(getCheminImageUnite(equipe2));
+         label_unite_joueur2 = new JLabel(image_unite2);
+         dimension_image = label_unite_joueur2.getPreferredSize();
+         label_PV_joueur2 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe2)).getPV());
+         label_attaque_joueur2 = new JLabel("P. attaque : " + l_u.getListe().get(getIDUnite(equipe2)).getP_att());
+         label_defense_joueur2 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe2)).getP_def());
+         label_depl_joueur2 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe2)).getDepl());
+         label_vision_joueur2 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe2)).getVision());
 
-        pseudo_joueur2 = new JLabel("Nom : " + pseudo2);
-        ajouterTexte(pseudo_joueur2, 1200, 98, 100, 100, 15, Color.BLACK);
-
+          ajouterInfoJoueur(pseudo_joueur2, unite_joueur2, label_unite_joueur2,
+                            label_PV_joueur2, label_attaque_joueur2, label_defense_joueur2,
+                            label_depl_joueur2, label_vision_joueur2, 1150, 98, 1150, 118,
+                            1150, 80, 1150, 138, 1150, 158, 1150, 178, 1150, 198, 1150, 226,
+                            dimension_image.width, dimension_image.height);
 
         afficherPlateau();
 
@@ -95,7 +121,6 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         for(int i=0; i<plateau.getNombreLigne(); i++)
             for(int j=0; j<plateau.getNombreColonne(); j++)
                 {
-            	System.out.println("i:"+i+"j:"+j+"getter:"+plateau.getTerrains()[i][j]);
                     points = controleur.ConvertirCaseEnPoint(i,j);
                     image_terrain = new ImageIcon(getCheminImageTerrain(plateau.getTerrains()[i][j]));
                     label_terrain = new JLabel(image_terrain);
@@ -106,12 +131,20 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
     }
 
     private void ajouterInfoJoueur(JLabel pseudo_joueur, JLabel unite_joueur,
-                                   JLabel label_unite_joueur, int x1, int y1,
-                                   int x2, int y2, int x3, int y3, int largeur,
-                                   int hauteur)
+                                   JLabel label_unite_joueur, JLabel label_PV_joueur,
+                                   JLabel label_attaque_joueur, JLabel label_defense_joueur,
+                                   JLabel label_depl_joueur, JLabel label_vision_joueur,
+                                   int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4,
+                                   int x5, int y5, int x6, int y6, int x7, int y7,
+                                   int x8, int y8, int largeur, int hauteur)
     {
         ajouterTexte(pseudo_joueur, x1, y1, 100, 100, 13, Color.BLACK);
         ajouterTexte(unite_joueur, x2, y2, 100, 100, 13, Color.BLACK);
+        ajouterTexte(label_PV_joueur, x4, y4, 100, 100, 13, Color.BLACK);
+        ajouterTexte(label_attaque_joueur, x5, y5, 100, 100, 13, Color.BLACK);
+        ajouterTexte(label_defense_joueur, x6, y6, 100, 100, 13, Color.BLACK);
+        ajouterTexte(label_depl_joueur, x7, y7, 100, 100, 13, Color.BLACK);
+        ajouterTexte(label_vision_joueur, x8, y8, 100, 100, 13, Color.BLACK);
 
         label_unite_joueur.setBounds(x3, y3, largeur, hauteur);
         panel.add(label_unite_joueur);
@@ -175,24 +208,6 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
             return (String) null;
     }
 
-    /*public void ajouterImage()
-    {
-
-        BufferedImage image = ImageIO.read(new File("./java.jpg"));
-        JLabel label = new JLabel(new ImageIcon(image));
-        panel.add(label);
-
-        // main window
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("JPanel Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // add the Jpanel to the main window
-        frame.add(panel);
-
-        frame.pack();
-        frame.setVisible(true);
-    }*/
 
     @Override
     public void mousePressed(MouseEvent e)
@@ -220,7 +235,8 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("x : " + e.getX() + " \n y : " + e.getY());
+        int[] coord_matrice = controleur.ConvertirCoordonneesEnCase(e.getX(), e.getY());
+        System.out.println("ligne : " + coord_matrice[0] + " \n colonne : " + coord_matrice[1]);
     }
 
 
