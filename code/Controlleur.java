@@ -9,7 +9,6 @@ public class Controlleur
 
     }
 
-
   public int[] ConvertirCaseEnPoint(int ligne, int col){
 	  int coordonnees[] = {0,0};
 	  if(ligne%2==0)
