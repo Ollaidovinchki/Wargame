@@ -5,11 +5,13 @@ import java.util.Scanner;
 
 public class Equipe implements Serializable{
 
+	protected String nom;
 	protected int id;
 	protected ArrayList<Unite> liste_unite_equipe = new ArrayList<Unite>();
 
-	public Equipe(int i) {
+	public Equipe(int i, String nom) {
 		this.id=i;
+		this.nom = nom;
 	}
 
 	public int getId() { return this.id; }

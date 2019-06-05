@@ -13,13 +13,13 @@ public class Controlleur
 	  int coordonnees[] = {0,0};
 	  if(ligne%2==0)
 	  {
-		  coordonnees[0]=12+ col*60;
-		  coordonnees[1]=65+ ligne*50;
+		  coordonnees[0]=311+ col*62;
+		  coordonnees[1]=95+ ligne*55;
 	  }
 	  else
 	  {
-		  coordonnees[0]=42+ col*60;
-		  coordonnees[1]=115+ (ligne-1)*50;
+		  coordonnees[0]=341+ col*62;
+		  coordonnees[1]=148+ (ligne-1)*55;
 	  }
 	  return coordonnees;
   }

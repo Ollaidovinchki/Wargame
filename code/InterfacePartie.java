@@ -50,7 +50,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         ajouterFrame("Wargame - Jeu", 1400, 900);
         frame.getContentPane().setBackground(Color.WHITE);
         frame.getContentPane().addMouseListener(this);
-        //super.ajouterImage("img/plateau.jpg");
+        super.ajouterImage("img/plateau.jpg");
         ajouterPanel(1400, 900);
 
         pseudo_joueur1 = new JLabel("Nom : " + pseudo1);
@@ -87,6 +87,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         for(int i=0; i<plateau.getNombreLigne(); i++)
             for(int j=0; j<plateau.getNombreColonne(); j++)
                 {
+            	System.out.println("i:"+i+"j:"+j+"getter:"+plateau.getTerrains()[i][j]);
                     points = controleur.ConvertirCaseEnPoint(i,j);
                     image_terrain = new ImageIcon(getCheminImageTerrain(plateau.getTerrains()[i][j]));
                     label_terrain = new JLabel(image_terrain);
@@ -145,7 +146,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         else if(c instanceof Plaine)
             return "img/plaine.png";
         else if(c instanceof Village)
-            return "img/villag.png";
+            return "img/village.png";
         else
             return (String) null;
     }
