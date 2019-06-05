@@ -12,9 +12,9 @@ import java.util.Scanner;
 
 public class Plateau implements Serializable{
 
-	protected final int nb_ligne = 12;
-	protected final int nb_colonne = 12;
-	protected Case_hexagonales t_jeu[][] = new Case_hexagonales[12][12];
+	protected final int nb_ligne = 10;
+	protected final int nb_colonne = 10;
+	protected Case_hexagonales t_jeu[][] = new Case_hexagonales[nb_ligne][nb_colonne];
 	protected Equipe equipe1;
 	protected Equipe equipe2;
 	protected ArrayList<Integer> coup_ligne = new ArrayList<Integer>();
@@ -53,10 +53,25 @@ public class Plateau implements Serializable{
 		}
 
 
+	public int getNombreLigne()
+	{
+		return nb_ligne;
+	}
+
+	public int getNombreColonne()
+	{
+		return nb_colonne;
+	}
+
+	public Case_hexagonales[][] getTerrains()
+	{
+		return t_jeu;
+	}
+
 	public void AfficheTerrain() {
 	// Pour afficher les terrains, remplacer avec des coordonn�es et des images
-		for(int i=0;i<12;i++) {
-			for(int j=0;j<12;j++) {
+		for(int i=0;i<1;i++) {
+			for(int j=0;j<10;j++) {
 				if(this.t_jeu[i][j] instanceof Colline)
 					System.out.print(1);
 				else if(this.t_jeu[i][j] instanceof Eau_profonde)
