@@ -48,6 +48,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
     protected ListeUnite l_u;
     protected Controlleur controleur;
     protected Timer timer;
+    protected int a_qui_le_tour;
 
     public InterfacePartie(String pseudo1, String pseudo2, String equipe1,
                            String equipe2, int mode_jeu)
@@ -56,6 +57,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         Dimension dimension_image;
 
         l_u = new ListeUnite();
+        a_qui_le_tour = 1;
 
         plateau = new Plateau(new ListeTerrain());
         plateau.setEquipes(new Equipe(1), new Equipe(2));
@@ -142,12 +144,6 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
                     dimensions = label_.getPreferredSize();
                     label_.setBounds(points[0], points[1], dimensions.width, dimensions.height);
                     panel.add(label_);
-                }
-
-        for(i=0; i<plateau.getNombreLigne(); i++)
-            for(j=0; j<plateau.getNombreColonne(); j++)
-                {
-                    points = controleur.ConvertirCaseEnPoint(i,j);
 
                     if(plateau.getTerrains()[i][j].getEtatCase() == 1)
                     {
@@ -168,8 +164,8 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
                         panel.add(labels_unite_joueur2[id_j2]);
                         id_j2 += 1;
                     }
-
                 }
+
     }
 
     private void ajouterInfoJoueur(JLabel pseudo_joueur, JLabel unite_joueur,
@@ -298,8 +294,24 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int[] coord_matrice = controleur.ConvertirCoordonneesEnCase(e.getX(), e.getY());
-        System.out.println("ligne : " + coord_matrice[0] + " \n colonne : " + coord_matrice[1]);
+        int[] coord_matrice;
+        String action_joueur;
+        String[] action_possibles = {"Attaquer ennemi", "Passer son tour", "Se deplacer"};
+
+        if(e.getX() >= 311 && e.getX() <= 1080 && e.getY() >= 94 && e.getY() <= 762)
+        {
+            coord_matrice = controleur.ConvertirCoordonneesEnCase(e.getX(), e.getY());
+
+            if(a_qui_le_tour == plateau.getTerrains()[coord_matrice[0]][coord_matrice[1]].getEtatCase())
+            {
+                action_joueur = JOptionPane.showInputDialog(frame,
+                         "Veuiller selectionner l'action a effectuer \n",
+                         "Wargame",
+                         JOptionPane.PLAIN_MESSAGE, null,
+                         action_possibles, "choisir une action").toString();
+            }
+        }
+
     }
 
 
@@ -319,7 +331,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
 
         if(obj == boutton1)
         {
-            
+
         }
 
     }

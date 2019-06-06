@@ -264,6 +264,11 @@ public class InterfacePrincipal implements ActionListener{
 
     }
 
+    public void sauvegarderPartie()
+    {
+        
+    }
+
     /**
      * Cette methode traite et exécute les actions des joueurs.
      *
