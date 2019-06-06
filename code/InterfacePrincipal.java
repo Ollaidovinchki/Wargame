@@ -299,9 +299,6 @@ public class InterfacePrincipal implements ActionListener{
             frame.dispose();
         }
 
-
-
-
     }
 
 }

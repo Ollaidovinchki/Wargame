@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 import java.awt.Cursor;
@@ -17,7 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Point;
 import javax.swing.JOptionPane;
-
+import java.util.Random;
 
 
 /**
@@ -40,19 +41,17 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
                      label_PV_joueur2, label_attaque_joueur2,
                      label_defense_joueur2, label_depl_joueur2,
                      label_vision_joueur2;
+    protected JLabel[] labels_unite_joueur1;
+    protected JLabel[] labels_unite_joueur2;
     protected ImageIcon image_unite1, image_unite2;
     protected Plateau plateau;
     protected ListeUnite l_u;
     protected Controlleur controleur;
-
+    protected Timer timer;
 
     public InterfacePartie(String pseudo1, String pseudo2, String equipe1,
                            String equipe2, int mode_jeu)
     {
-
-        //boutton3 = new JButton("CHARGER UNE PARTIE");
-        //ajouterBoutton(boutton3, 320, 410, 300, 40, new Color(128,128,0), Color.WHITE);
-
 
         Dimension dimension_image;
 
@@ -92,6 +91,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
         label_defense_joueur1 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe1)).getP_def());
         label_depl_joueur1 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe1)).getDepl());
         label_vision_joueur1 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe1)).getVision());
+        labels_unite_joueur1 = new JLabel[3];
 
         ajouterInfoJoueur(pseudo_joueur1, unite_joueur1, label_unite_joueur1,
                           label_PV_joueur1, label_attaque_joueur1, label_defense_joueur1,
@@ -110,6 +110,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
          label_defense_joueur2 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe2)).getP_def());
          label_depl_joueur2 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe2)).getDepl());
          label_vision_joueur2 = new JLabel("PV : " + l_u.getListe().get(getIDUnite(equipe2)).getVision());
+         labels_unite_joueur2 = new JLabel[3];
 
           ajouterInfoJoueur(pseudo_joueur2, unite_joueur2, label_unite_joueur2,
                             label_PV_joueur2, label_attaque_joueur2, label_defense_joueur2,
@@ -117,29 +118,57 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
                             1150, 80, 1150, 138, 1150, 158, 1150, 178, 1150, 198, 1150, 226,
                             dimension_image.width, dimension_image.height);
 
-        afficherPlateau();
-
+        afficherPlateau(equipe1, equipe2);
+        timer = creerTimer();
+        timer.start ();
 
     }
 
 
-    private void afficherPlateau()
+    private void afficherPlateau(String equipe1, String equipe2)
     {
-
-        ImageIcon image_terrain;
-        JLabel label_terrain ;
+        int i,j, id_j1 = 0, id_j2 = 0;
+        ImageIcon image_;
+        JLabel label_ ;
         Dimension dimensions;
         int[] points;
 
-        for(int i=0; i<plateau.getNombreLigne(); i++)
-            for(int j=0; j<plateau.getNombreColonne(); j++)
+        for(i=0; i<plateau.getNombreLigne(); i++)
+            for(j=0; j<plateau.getNombreColonne(); j++)
                 {
                     points = controleur.ConvertirCaseEnPoint(i,j);
-                    image_terrain = new ImageIcon(getCheminImageTerrain(plateau.getTerrains()[i][j]));
-                    label_terrain = new JLabel(image_terrain);
-                    dimensions = label_terrain.getPreferredSize();
-                    label_terrain.setBounds(points[0], points[1], dimensions.width, dimensions.height);
-                    panel.add(label_terrain);
+                    image_ = new ImageIcon(getCheminImageTerrain(plateau.getTerrains()[i][j]));
+                    label_ = new JLabel(image_);
+                    dimensions = label_.getPreferredSize();
+                    label_.setBounds(points[0], points[1], dimensions.width, dimensions.height);
+                    panel.add(label_);
+                }
+
+        for(i=0; i<plateau.getNombreLigne(); i++)
+            for(j=0; j<plateau.getNombreColonne(); j++)
+                {
+                    points = controleur.ConvertirCaseEnPoint(i,j);
+
+                    if(plateau.getTerrains()[i][j].getEtatCase() == 1)
+                    {
+                        image_ = new ImageIcon(getCheminImageUnite(equipe1));
+                        labels_unite_joueur1[id_j1] = new JLabel(image_);
+                        dimensions = labels_unite_joueur1[id_j1].getPreferredSize();
+                        labels_unite_joueur1[id_j1].setBounds(points[0], points[1], dimensions.width, dimensions.height);
+                        panel.add(labels_unite_joueur1[id_j1]);
+
+                        id_j1 += 1;
+                    }
+                    else if(plateau.getTerrains()[i][j].getEtatCase() == 2)
+                    {
+                        image_ = new ImageIcon(getCheminImageUnite(equipe2));
+                        labels_unite_joueur2[id_j2] = new JLabel(image_);
+                        dimensions = labels_unite_joueur2[id_j2].getPreferredSize();
+                        labels_unite_joueur2[id_j2].setBounds(points[0], points[1] - 5, dimensions.width, dimensions.height);
+                        panel.add(labels_unite_joueur2[id_j2]);
+                        id_j2 += 1;
+                    }
+
                 }
     }
 
@@ -222,6 +251,27 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
     }
 
 
+    private Timer creerTimer()
+    {
+        Random rndm = new Random();
+        ActionListener action = new ActionListener ()
+        {
+                public void actionPerformed (ActionEvent event)
+                {
+                    if (label_wargame.getForeground().equals (Color.BLACK))
+                        label_wargame.setForeground(new Color(rndm.nextInt(256),rndm.nextInt(256),rndm.nextInt(256)));
+                    else
+                        label_wargame.setForeground(Color.BLACK);
+          }
+        };
+
+        return new Timer(500, action);
+    }
+
+
+
+
+
     @Override
     public void mousePressed(MouseEvent e)
     {
@@ -269,7 +319,7 @@ public class InterfacePartie extends InterfacePrincipal implements ActionListene
 
         if(obj == boutton1)
         {
-
+            
         }
 
     }
