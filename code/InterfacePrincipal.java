@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.awt.Choice;
 import java.awt.Color;
@@ -264,10 +265,55 @@ public class InterfacePrincipal implements ActionListener{
 
     }
 
-    public void sauvegarderPartie()
+    public void sauvegarderPartie(Plateau plateau)
     {
-        
-    }
+        File fichier;
+        File repertoire_partie_sauvegardees;
+        String sauvegarde;
+
+        repertoire_partie_sauvegardees = new File("./sauvegarde");
+
+        try
+        {
+            if (!repertoire_partie_sauvegardees.exists())
+                repertoire_partie_sauvegardees.mkdir();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+
+        if(repertoire_partie_sauvegardees != null)
+        {
+            sauvegarde = (String)JOptionPane.showInputDialog(frame,
+            "Merci de saisir le nom de votre sauvegarde", "Wargame - Sauvegarde",
+            JOptionPane.QUESTION_MESSAGE,null, null, "sauvegarde.txt");
+
+            if ((sauvegarde != null) && (sauvegarde.length() > 0))
+            {
+
+                try{
+                    fichier = new File("./sauvegarde" + sauvegarde);
+                    ObjectOutputStream oos =  new ObjectOutputStream(new FileOutputStream(fichier)) ;
+                    oos.writeObject(plateau);
+                    oos.close();
+                }
+                catch(IOException e)
+                {
+                    JOptionPane.showMessageDialog(frame,
+                    "Fichier introuvable",
+                    "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+
+                JOptionPane.showMessageDialog(frame, "Fichier enregistre", "Wargame - Sauvegarde", JOptionPane.PLAIN_MESSAGE);
+            }
+            else
+                JOptionPane.showMessageDialog(frame, "La sauvegarde a echouee !!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+
+}
+
 
     /**
      * Cette methode traite et exécute les actions des joueurs.

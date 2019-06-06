@@ -35,7 +35,6 @@ public class Controlleur
              {
                  if ((x>=(311 + 62*j) && x<=(369 +62*j)  && y>=(111+55*i) && y<=(142+55*i) ))
                  {
-                	 System.out.println("pair" );
                    coordonnees[0]=i;
                    coordonnees[1]=j;
                    return coordonnees;
@@ -56,5 +55,21 @@ public class Controlleur
      return coordonnees;
 }
 
+
+public Unite getUnite(String unite)
+{
+    if(unite.equals("Archer"))
+        return new Archer();
+    if(unite.equals("I. legere"))
+        return new Infanterie();
+    if(unite.equals("I. lourde"))
+        return new InfLourde();
+    if(unite.equals("Mage"))
+        return new Mage();
+    if(unite.equals("Chevalier"))
+        return new Cavalerie();
+
+    return null;    
+}
 
 }

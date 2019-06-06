@@ -19,6 +19,7 @@ public class Plateau implements Serializable{
 	protected Equipe equipe2;
 	protected ArrayList<Integer> coup_ligne = new ArrayList<Integer>();
 	protected ArrayList<Integer> coup_colonne = new ArrayList<Integer>();
+	protected Unite unite_equipe1, unite_equipe2;
 
 	Plateau(ListeTerrain liste_t) {
 		Random rnd = new Random();
@@ -70,12 +71,6 @@ public class Plateau implements Serializable{
 		return t_jeu;
 	}
 
-	public void setEquipes(Equipe equipe1, Equipe equipe2)
-	{
-		this.equipe1 = equipe1;
-		this.equipe2 = equipe2;
-	}
-
 
 	public Equipe getEquipe1()
 	{
@@ -87,6 +82,36 @@ public class Plateau implements Serializable{
 	{
 		return equipe2;
 	}
+
+	public Unite getUniteEquipe1()
+	{
+		return unite_equipe1;
+	}
+
+	public Unite getUniteEquipe2()
+	{
+		return unite_equipe2;
+	}
+
+
+	public void setEquipes(Equipe equipe1, Equipe equipe2)
+	{
+		this.equipe1 = equipe1;
+		this.equipe2 = equipe2;
+	}
+
+	public void setUniteEquipe1(Unite unite_equipe1)
+	{
+		this.unite_equipe1 = unite_equipe1;
+	}
+
+	public void setUniteEquipe2(Unite unite_equipe2)
+	{
+		this.unite_equipe2 = unite_equipe2;
+	}
+
+
+
 	/*public void AfficheTerrain() {
 	// Pour afficher les terrains, remplacer avec des coordonn�es et des images
 		for(int i=0;i<10;i++) {
@@ -113,11 +138,13 @@ public class Plateau implements Serializable{
 	public void PlaceEquipe(Equipe e1, Equipe e2) {
 		for(int i=0;i<e1.getTailleEquipe();i++) {
 			this.t_jeu[0][2+i].setEtatCase(1);
+			this.t_jeu[0][2+i].setID_Unite(i);
 			e1.liste_unite_equipe.get(i).setColonne(2+i);
 			e1.liste_unite_equipe.get(i).setLigne(0);
 		}
 		for(int j=0;j<e2.getTailleEquipe();j++) {
 			this.t_jeu[9][2+j].setEtatCase(2);
+			this.t_jeu[0][2+j].setID_Unite(j);
 			e2.liste_unite_equipe.get(j).setColonne(2+j);
 			e2.liste_unite_equipe.get(j).setLigne(9);
 		}

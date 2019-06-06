@@ -17,6 +17,7 @@ public class Case_hexagonales implements Serializable{
 	// effet bonus de defense
 	protected double bonus_defense;
 
+	protected int id_unite;
 	/**
 	* Constructor
 	*/
@@ -51,6 +52,13 @@ public class Case_hexagonales implements Serializable{
 		return this.bonus_defense;
 	}
 
+
+
+	public int getID_Unite()
+	{
+		return id_unite;
+	}
+
 	/**
 	* rend la case hexagonale occupe
 	*/
@@ -65,6 +73,13 @@ public class Case_hexagonales implements Serializable{
 	public void setBonus_defense(double bonus) {
 		this.bonus_defense = bonus;
 	}
+
+
+	public void setID_Unite(int id_unite)
+	{
+		this.id_unite = id_unite;
+	}
+
 
 	/**
 	* set le point de deplacement
