@@ -3,8 +3,11 @@
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
+
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,33 +22,38 @@ import javax.swing.JOptionPane;
 
 
 public class InterfaceCreationEquipe1 extends InterfacePrincipal implements ActionListener {
-
+	private JCheckBox[] check;/* = new JCheckBox("Archer");
+	private JCheckBox check2 = new JCheckBox("I Leg");
+	private JCheckBox check3 = new JCheckBox("Lourde");
+	private JCheckBox check4 = new JCheckBox("Mage");
+	private JCheckBox check5 = new JCheckBox("Chevalier");*/
     private CheckboxGroup checkboxgroup1, checkboxgroup2;
-    private Checkbox[] checkboxs;
+    //private Checkbox[] checkboxs;
     protected JTextField champ_pseudo1, champ_pseudo2;
 
     public InterfaceCreationEquipe1(){
+    	
+    	//ButtonGroup bg = new ButtonGroup();
+        //checkboxgroup1 = new CheckboxGroup();
+       // checkboxgroup2 = new CheckboxGroup();
 
-        checkboxgroup1 = new CheckboxGroup();
-        checkboxgroup2 = new CheckboxGroup();
-
-        checkboxs = new Checkbox[10];
+        check = new JCheckBox[10];
 
         ajouterFrame("Wargame - Creation equipes", 998, 613);
 		ajouterImage("img/img2.jpg");
         ajouterPanel(998, 613);
 
-        ajouterCheckbox(new Checkbox("Archer", checkboxgroup1, true), 25, 430, 60, 50, 0);
-        ajouterCheckbox(new Checkbox("I. legere", checkboxgroup1, false), 100, 430, 70, 50, 1);
-        ajouterCheckbox(new Checkbox("I. lourde", checkboxgroup1, false), 195, 430, 70, 50, 2);
-        ajouterCheckbox(new Checkbox("Mage", checkboxgroup1, false), 300, 430, 50, 50, 3);
-        ajouterCheckbox(new Checkbox("Chevalier", checkboxgroup1, false), 380, 430, 70, 50, 4);
+        ajouterCheckbox(new JCheckBox("Archer"), 25, 430, 60, 50, 0);
+        ajouterCheckbox(new JCheckBox("I. legere"), 100, 430, 70, 50, 1);
+        ajouterCheckbox(new JCheckBox("I. lourde"), 195, 430, 70, 50, 2);
+        ajouterCheckbox(new JCheckBox("Mage"), 300, 430, 50, 50, 3);
+        ajouterCheckbox(new JCheckBox("Chevalier"), 380, 430, 70, 50, 4);
 
-        ajouterCheckbox(new Checkbox("Archer", checkboxgroup2, true), 540, 430, 60, 50, 5);
-        ajouterCheckbox(new Checkbox("I. legere", checkboxgroup2, false), 620, 430, 70, 50, 6);
-        ajouterCheckbox(new Checkbox("I. lourde", checkboxgroup2, false), 715, 430, 70, 50, 7);
-        ajouterCheckbox(new Checkbox("Mage", checkboxgroup2, false), 810, 430, 50, 50, 8);
-        ajouterCheckbox(new Checkbox("Chevalier", checkboxgroup2, false), 890, 430, 70, 50, 9);
+        ajouterCheckbox(new JCheckBox("Archer"), 540, 430, 60, 50, 5);
+        ajouterCheckbox(new JCheckBox("I. legere"), 620, 430, 70, 50, 6);
+        ajouterCheckbox(new JCheckBox("I. lourde"), 715, 430, 70, 50, 7);
+        ajouterCheckbox(new JCheckBox("Mage"), 810, 430, 50, 50, 8);
+        ajouterCheckbox(new JCheckBox("Chevalier"), 890, 430, 70, 50, 9);
 
         champ_pseudo1 = new JTextField(30);
         ajouterTextField(champ_pseudo1, 540, 110, 250, 50);
@@ -60,11 +68,11 @@ public class InterfaceCreationEquipe1 extends InterfacePrincipal implements Acti
 
     }
 
-    private void ajouterCheckbox(Checkbox checkbox, int x, int y, int largeur, int hauteur, int id)
+    private void ajouterCheckbox(JCheckBox checkbox, int x, int y, int largeur, int hauteur, int id)
     {
-        checkboxs[id] = checkbox;
-        checkboxs[id].setBounds(x, y, largeur, hauteur);
-        panel.add(checkboxs[id]);
+        check[id] = checkbox;
+        check[id].setBounds(x, y, largeur, hauteur);
+        panel.add(check[id]);
     }
 
     private void ajouterTextField(JTextField textfield, int x, int y, int largeur, int hauteur)
